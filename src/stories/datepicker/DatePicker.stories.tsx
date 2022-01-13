@@ -2,10 +2,10 @@ import React from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { DatePicker } from "./DatePicker";
+import { DatePicker } from "../../DatePicker";
 
 export default {
-  title: "Chakra DatePicker / Old / DatePicker",
+  title: "chakra-datepicker / DatePicker",
   component: DatePicker,
 } as ComponentMeta<typeof DatePicker>;
 
