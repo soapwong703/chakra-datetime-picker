@@ -1108,6 +1108,7 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
                 onCancel={onCancel}
                 cancelText={cancelText}
                 currentLangKey={currentLangKey}
+                colorScheme={colorScheme}
               />
             </PopoverBody>
           </PopoverContent>
