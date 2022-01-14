@@ -1,15 +1,15 @@
-# chakra-datepicker
+# chakra-datetime-picker
 
 A Datetimepicker Component designed for Chakra-UI
 
 # Installation
 
 ```sh
-npm install @soapwong703/chakra-datepicker
+npm i chakra-datetime-picker
 
 # or
 
-yarn add @soapwong703/chakra-datepicker
+yarn add chakra-datetime-picker
 ```
 
 # Description
