@@ -12,7 +12,7 @@
     "!src/*/"
   ],
   "scripts": {
-    "prepare": "npm run build",
+    "prepack": "npm run build",
     "watch": "parcel watch",
     "build": "parcel build",
     "storybook": "start-storybook -p 6006",
