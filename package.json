@@ -1,7 +1,7 @@
 {
   "name": "chakra-datetime-picker",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A Datetimepicker Component designed for Chakra-UI",
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
