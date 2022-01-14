@@ -2,6 +2,16 @@
 
 A Datetimepicker Component designed for Chakra-UI
 
+# Installation
+
+```sh
+npm install @soapwong703/chakra-datepicker
+
+# or
+
+yarn add @soapwong703/chakra-datepicker
+```
+
 # Description
 
 This component utilize dayjs to support date and datetime input with Chakra-UI style
