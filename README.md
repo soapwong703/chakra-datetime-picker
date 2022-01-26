@@ -14,7 +14,7 @@ yarn add chakra-datetime-picker
 
 # Demo
 
-[Storybook](https://61f115a923ff7a003af69d6a-ahdggacykr.chromatic.com/)
+[Storybook](https://main--61f115a923ff7a003af69d6a.chromatic.com)
 
 # Description
 
