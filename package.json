@@ -18,7 +18,8 @@
     "watch": "parcel watch",
     "build": "parcel build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +35,7 @@
     "@storybook/manager-webpack5": "^6.4.12",
     "@storybook/react": "^6.4.12",
     "babel-loader": "^8.2.3",
+    "chromatic": "^6.4.1",
     "parcel": "^2.2.0",
     "typescript": "^4.5.4"
   },

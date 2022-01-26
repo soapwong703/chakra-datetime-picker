@@ -12,6 +12,10 @@ npm i chakra-datetime-picker
 yarn add chakra-datetime-picker
 ```
 
+# Demo
+
+[Storybook](https://61f115a923ff7a003af69d6a-ahdggacykr.chromatic.com/)
+
 # Description
 
 This component utilize dayjs to support date and datetime input with Chakra-UI style
