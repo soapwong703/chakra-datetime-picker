@@ -1002,7 +1002,7 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
       inputProps,
       isInvalid,
       allowClear = true,
-      wrapPortal,
+      wrapPortal = true,
     },
     ref
   ) => {
