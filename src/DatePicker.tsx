@@ -9,7 +9,7 @@ import React, {
   useMemo,
   forwardRef,
   useRef,
-  Ref,
+  FC,
 } from "react";
 import {
   FaArrowLeft,
@@ -35,10 +35,8 @@ import {
   PopoverContent,
   PopoverBody,
   Portal,
-  ButtonProps,
-  Placement,
-  InputProps,
 } from "@chakra-ui/react";
+import { DatePickerInputProps, DatePickerProps } from "./types";
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
@@ -49,51 +47,6 @@ const _disabled = {
   color: "gray.200",
   cursor: "not-allowed",
 };
-
-export interface DatePickerProps {
-  cancelButtonProps?: ButtonProps;
-  cancelText?: string;
-  colorScheme?: string;
-  currentLangKey?: "en" | "zh" | "zh_cn";
-  defaultValue?: string | number | Dayjs;
-  disableTimestampAfter?: number | false;
-  disableTimestampBefore?: number | false;
-  format?: string;
-  isDisabled?: boolean;
-  okButtonProps?: ButtonProps;
-  okText?: string;
-  onCancel?: (day: Dayjs) => void;
-  onChange?: (formattedDay: string, day: Dayjs) => void;
-  onOk?: (day: Dayjs) => void;
-  picker?: "anniversary" | "date";
-  showCancelButton?: boolean;
-  showOkButton?: boolean;
-  showSelectableDays?: boolean;
-  showTimeSelector?: boolean;
-  size?: "sm" | "md" | "lg";
-  selectableDays?: {
-    format: string;
-    text: string;
-    timestamp: number | Dayjs;
-  }[];
-  value?: Dayjs | null;
-}
-
-export interface DatePickerInputProps extends DatePickerProps {
-  allowClear?: boolean;
-  datePickerDefaultIsOpen?: boolean;
-  datePickerIsOpen?: boolean;
-  inputProps?: InputProps;
-  isInvalid?: boolean;
-  name?: string;
-  onBlur?: () => void;
-  onClear?: (formattedValue: string, value: Dayjs) => void;
-  onFocus?: () => void;
-  placeholder?: string;
-  placement?: Placement;
-  ref?: Ref<any>;
-  wrapPortal?: boolean;
-}
 
 const defaultProps: DatePickerProps = {
   onChange: () => {
@@ -233,7 +186,7 @@ const componentSize = {
   },
 };
 
-export const DatePicker: React.FC<DatePickerProps> = ({
+export const DatePicker: FC<DatePickerProps> = ({
   picker,
   defaultValue,
   value,
