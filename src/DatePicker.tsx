@@ -10,6 +10,7 @@ import React, {
   forwardRef,
   useRef,
   FC,
+  useImperativeHandle,
 } from "react";
 import {
   FaArrowLeft,
@@ -127,6 +128,9 @@ const componentSize = {
     datepickerInput: {
       size: "md",
     },
+    calendarButton: {
+      size: "sm",
+    },
     okButton: {
       size: "sm",
     },
@@ -177,6 +181,9 @@ const componentSize = {
     datepickerInput: {
       size: "sm",
     },
+    calendarButton: {
+      size: "xs",
+    },
     okButton: {
       size: "xs",
     },
@@ -185,6 +192,8 @@ const componentSize = {
     },
   },
 };
+
+(componentSize as any).lg = componentSize.md;
 
 export const DatePicker: FC<DatePickerProps> = ({
   picker,
@@ -241,7 +250,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   // const numWeeks = Math.ceil((curr.daysInMonth() + curr.day()) / 7);
   const numWeeks = 6;
 
-  const [curr, setCurr] = useState(now.startOf("month"));
+  const [currMonth, setCurrMonth] = useState(now.startOf("month"));
   const [selectedDate, setSelectedDate] = useState<Dayjs>(undefined);
   const [selectedTime, setSelectedTime] = useState<{
     hour: number;
@@ -256,7 +265,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   const [view, setView] = useState("datetime");
 
   const recentTenYear = (() => {
-    let nearestTenYear = curr.startOf("year");
+    let nearestTenYear = currMonth.startOf("year");
     while (nearestTenYear.year() % 10 !== 0) {
       nearestTenYear = nearestTenYear.subtract(1, "year");
     }
@@ -269,7 +278,7 @@ export const DatePicker: FC<DatePickerProps> = ({
     if (defaultValueRef) {
       let dayjsValue = dayjs(defaultValueRef);
       if (picker === "anniversary") dayjsValue = dayjsValue.year(now.year());
-      setCurr(dayjsValue.startOf("month"));
+      setCurrMonth(dayjsValue.startOf("month"));
       setSelectedDate(dayjsValue.startOf("date"));
       setSelectedTime({
         hour: dayjsValue.hour(),
@@ -280,10 +289,10 @@ export const DatePicker: FC<DatePickerProps> = ({
   }, [defaultValueRef, now, picker]);
 
   useEffect(() => {
-    if (value) {
+    if (!!value) {
       let dayjsValue = dayjs(value);
       if (picker === "anniversary") dayjsValue = dayjsValue.year(now.year());
-      setCurr(dayjsValue.startOf("month"));
+      setCurrMonth(dayjsValue.startOf("month"));
       setSelectedDate(dayjsValue.startOf("date"));
       setSelectedTime({
         hour: dayjsValue.hour(),
@@ -395,7 +404,10 @@ export const DatePicker: FC<DatePickerProps> = ({
 
   const onTimeClick = (unit, item) => {
     if (value) {
-      onChange(value[unit](item).format(format), dayjs(value)[unit](item));
+      onChange(
+        dayjs(value)[unit](item).format(format),
+        dayjs(value)[unit](item)
+      );
       return;
     }
     setSelectedTime((prevState) => ({ ...prevState, [unit]: item }));
@@ -412,7 +424,7 @@ export const DatePicker: FC<DatePickerProps> = ({
       minute: day.get("minute"),
       second: day.get("second"),
     });
-    setCurr(day.startOf("month"));
+    setCurrMonth(day.startOf("month"));
   };
 
   const selectableDayIsDisabled = useCallback(
@@ -467,7 +479,7 @@ export const DatePicker: FC<DatePickerProps> = ({
               aria-label="previous"
               isDisabled={
                 picker === "anniversary" &&
-                curr.subtract(1, "month").isBefore(now.startOf("year"))
+                currMonth.subtract(1, "month").isBefore(now.startOf("year"))
               }
               icon={
                 view === "month" ? (
@@ -484,10 +496,10 @@ export const DatePicker: FC<DatePickerProps> = ({
               colorScheme={colorScheme}
               onClick={() => {
                 if (view === "year")
-                  return setCurr((curr) => curr.subtract(10, "year"));
+                  return setCurrMonth((curr) => curr.subtract(10, "year"));
                 if (view === "month")
-                  return setCurr((curr) => curr.subtract(1, "year"));
-                return setCurr((curr) => curr.subtract(1, "month"));
+                  return setCurrMonth((curr) => curr.subtract(1, "year"));
+                return setCurrMonth((curr) => curr.subtract(1, "month"));
               }}
             />
           )}
@@ -513,7 +525,7 @@ export const DatePicker: FC<DatePickerProps> = ({
                 setView("month");
               }}
             >
-              {view === "datetime" && curr.format("MMM")}
+              {view === "datetime" && currMonth.format("MMM")}
             </Box>
             {picker !== "anniversary" && (
               <Box
@@ -529,7 +541,7 @@ export const DatePicker: FC<DatePickerProps> = ({
                   ? `${recentTenYear.format("YYYY")}-${recentTenYear
                       .add(9, "year")
                       .format("YYYY")}`
-                  : curr.format("YYYY")}
+                  : currMonth.format("YYYY")}
               </Box>
             )}
           </Flex>
@@ -538,7 +550,7 @@ export const DatePicker: FC<DatePickerProps> = ({
               aria-label="next"
               isDisabled={
                 picker === "anniversary" &&
-                curr.add(1, "month").isAfter(now.endOf("year"))
+                currMonth.add(1, "month").isAfter(now.endOf("year"))
               }
               icon={
                 view === "month" ? (
@@ -555,10 +567,10 @@ export const DatePicker: FC<DatePickerProps> = ({
               colorScheme={colorScheme}
               onClick={() => {
                 if (view === "year")
-                  return setCurr((curr) => curr.add(10, "year"));
+                  return setCurrMonth((curr) => curr.add(10, "year"));
                 if (view === "month")
-                  return setCurr((curr) => curr.add(1, "year"));
-                return setCurr((curr) => curr.add(1, "month"));
+                  return setCurrMonth((curr) => curr.add(1, "year"));
+                return setCurrMonth((curr) => curr.add(1, "month"));
               }}
             />
           )}
@@ -568,7 +580,7 @@ export const DatePicker: FC<DatePickerProps> = ({
           <Flex h="100%">
             <Box h="100%">
               {[...new Array(12).keys()].map((i) => {
-                const month = curr.month(i).startOf("month");
+                const month = currMonth.month(i).startOf("month");
                 const isSelected = selectedDate
                   ? selectedDate.isSame(month, "month")
                   : false;
@@ -598,7 +610,7 @@ export const DatePicker: FC<DatePickerProps> = ({
                       border: "1px solid grey",
                     })}
                     onClick={() => {
-                      setCurr(month);
+                      setCurrMonth(month);
                       setView("datetime");
                     }}
                     isDisabled={isDisabled}
@@ -654,7 +666,7 @@ export const DatePicker: FC<DatePickerProps> = ({
                       border: "1px solid grey",
                     })}
                     onClick={() => {
-                      setCurr(year);
+                      setCurrMonth(year);
                       setView("month");
                     }}
                     isDisabled={isDisabled}
@@ -692,7 +704,9 @@ export const DatePicker: FC<DatePickerProps> = ({
             </Flex>
             <Flex flexWrap="wrap">
               {[...new Array(numWeeks * 7).keys()].map((i) => {
-                const d = curr.subtract(curr.day(), "day").add(i, "day");
+                const d = currMonth
+                  .subtract(currMonth.day(), "day")
+                  .add(i, "day");
                 const isSelected = selectedDate
                   ? d.isSame(selectedDate, "date")
                   : false;
@@ -703,29 +717,38 @@ export const DatePicker: FC<DatePickerProps> = ({
                   (disableTimestampAfter &&
                     d.isAfter(disableTimestampAfter, "day"));
                 return (
-                  <Button
-                    isDisabled={isDisabled}
-                    _disabled={_disabled}
-                    {...(isDisabled && { _hover: {} })}
-                    alignItems="center"
-                    justifyContent="center"
+                  <Box
                     key={i}
                     w={componentSize[size].dateButton.w}
                     h={componentSize[size].dateButton.h}
-                    fontWeight="bold"
-                    variant={isSelected ? "solid" : "ghost"}
-                    colorScheme={colorScheme}
-                    minW={15}
                     margin="2px"
-                    {...(!d.isSame(curr, "month") && { color: "gray.400" })}
-                    {...(d.isSame(now, "date") && { border: "1px solid grey" })}
-                    {...(!isSelected && { fontWeight: "normal" })}
-                    onClick={() => {
-                      onDateClick(d);
-                    }}
                   >
-                    {d.date()}
-                  </Button>
+                    <Button
+                      isDisabled={isDisabled}
+                      _disabled={_disabled}
+                      {...(isDisabled && { _hover: {} })}
+                      alignItems="center"
+                      justifyContent="center"
+                      fontWeight="bold"
+                      variant={isSelected ? "solid" : "ghost"}
+                      colorScheme={colorScheme}
+                      w="100%"
+                      h="100%"
+                      minW={15}
+                      {...(!d.isSame(currMonth, "month") && {
+                        color: "gray.400",
+                      })}
+                      {...(d.isSame(now, "date") && {
+                        border: "1px solid grey",
+                      })}
+                      {...(!isSelected && { fontWeight: "normal" })}
+                      onClick={() => {
+                        onDateClick(d);
+                      }}
+                    >
+                      {d.date()}
+                    </Button>
+                  </Box>
                 );
               })}
             </Flex>
@@ -956,19 +979,39 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
       isInvalid,
       allowClear = true,
       wrapPortal = true,
+      clearText,
     },
     ref
   ) => {
+    const inputRef = useRef(null);
+
+    useImperativeHandle(ref, () => inputRef.current);
+
     const [selectedDay, setSelectedDay] = useState("");
+    const isValidDate = (d) => !!dayjs(d, format)?.valueOf();
+
+    const onClearInput = () => {
+      if (!allowClear) {
+        inputRef.current.value = selectedDay;
+        return;
+      }
+      inputRef.current.value = "";
+      setSelectedDay("");
+      onChange("", null);
+      onClear("", null);
+    };
 
     const localOnChange = (dateString, date) => {
+      if (!isValidDate(dateString)) {
+        inputRef.current.value = selectedDay;
+        return;
+      }
       setSelectedDay(dateString);
       onChange(dateString, date);
+      inputRef.current.value = dateString;
     };
 
     const defaultValueRef = useRef(defaultValue).current;
-
-    const isValidDate = (d) => !!dayjs(d)?.valueOf();
 
     useEffect(() => {
       if (defaultValueRef) {
@@ -988,7 +1031,10 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
       }
     }, [value, format]);
 
-    const valueIsValid = useMemo(() => isValidDate(value), [value]);
+    const valueIsValid = useMemo(
+      () => isValidDate(value ?? selectedDay),
+      [value, selectedDay]
+    );
 
     return (
       <Popover
@@ -997,82 +1043,109 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
         placement={placement}
         isLazy
       >
-        <InputGroup size={componentSize[size].datepickerInput.size}>
-          <PopoverTrigger>
-            <Input
-              name={name}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              ref={ref}
-              value={selectedDay}
-              type="text"
-              isDisabled={isDisabled}
-              isReadOnly={true}
-              placeholder={placeholder}
+        {({ onClose }) => (
+          <>
+            <InputGroup
+              minW={"220px"}
               size={componentSize[size].datepickerInput.size}
-              {...inputProps}
-              isInvalid={isInvalid}
-              errorBorderColor="red.500"
-            />
-          </PopoverTrigger>
-          {allowClear && (
-            <InputRightElement zIndex={selectedDay === "" ? -1 : 1}>
-              <IconButton
-                aria-label="clear"
-                icon={
-                  selectedDay === "" ? <FaRegCalendar /> : <FaTimesCircle />
+            >
+              <Input
+                name={name}
+                onFocus={(e) =>
+                  isValidDate(e.target.value)
+                    ? onFocus(
+                        dayjs(e.target.value).format(format),
+                        dayjs(e.target.value)
+                      )
+                    : onFocus("", null)
                 }
-                size={componentSize[size].datepickerInput.size}
-                cursor={selectedDay === "" && "default !important"}
-                isDisabled={isDisabled || selectedDay === ""}
-                color="gray.500"
-                variant="link"
-                _focus={{ boxShadow: 0 }}
-                onClick={() => {
-                  localOnChange("", null);
-                  onClear("", null);
+                onBlur={(e) => {
+                  if (e.target.value === "") {
+                    onClearInput();
+                    return;
+                  }
+                  if (!isValidDate(e.target.value)) {
+                    onBlur("", null);
+                    localOnChange("", null);
+                    return;
+                  }
+                  localOnChange(
+                    dayjs(e.target.value).format(format),
+                    dayjs(e.target.value)
+                  );
+                  onBlur(
+                    dayjs(e.target.value).format(format),
+                    dayjs(e.target.value)
+                  );
                 }}
-              ></IconButton>
-            </InputRightElement>
-          )}
-        </InputGroup>
-
-        <PortalWrapper isWrapped={wrapPortal}>
-          <PopoverContent zIndex={4} minW="fit-content" w="auto">
-            <PopoverBody padding="3px">
-              <DatePicker
-                picker={picker}
+                ref={inputRef}
                 defaultValue={selectedDay}
-                format={format}
-                onChange={localOnChange}
-                value={valueIsValid ? value : null}
-                selectableDays={selectableDays}
-                showSelectableDays={showSelectableDays}
-                showTimeSelector={showTimeSelector}
-                disableTimestampBefore={disableTimestampBefore}
-                disableTimestampAfter={disableTimestampAfter}
-                size={size}
-                showOkButton={showOkButton}
-                okButtonProps={okButtonProps}
-                onOk={onOk}
-                okText={okText}
-                showCancelButton={showCancelButton}
-                cancelButtonProps={cancelButtonProps}
-                onCancel={onCancel}
-                cancelText={cancelText}
-                currentLangKey={currentLangKey}
-                colorScheme={colorScheme}
+                type="text"
+                isDisabled={isDisabled}
+                placeholder={placeholder ?? format}
+                size={componentSize[size].datepickerInput.size}
+                {...inputProps}
+                isInvalid={isInvalid}
+                errorBorderColor="red.500"
               />
-            </PopoverBody>
-          </PopoverContent>
-        </PortalWrapper>
+              <InputRightElement>
+                <PopoverTrigger>
+                  <IconButton
+                    aria-label="calendar"
+                    icon={<FaRegCalendar />}
+                    size={componentSize[size].calendarButton.size}
+                    variant="ghost"
+                    isRound
+                    colorScheme={colorScheme}
+                  ></IconButton>
+                </PopoverTrigger>
+              </InputRightElement>
+            </InputGroup>
+
+            <PortalWrapper isWrapped={wrapPortal}>
+              <PopoverContent zIndex={4} minW="fit-content" w="auto">
+                <PopoverBody padding="3px">
+                  <DatePicker
+                    picker={picker}
+                    defaultValue={selectedDay}
+                    format={format}
+                    onChange={localOnChange}
+                    value={valueIsValid ? value : null}
+                    selectableDays={selectableDays}
+                    showSelectableDays={showSelectableDays}
+                    showTimeSelector={showTimeSelector}
+                    disableTimestampBefore={disableTimestampBefore}
+                    disableTimestampAfter={disableTimestampAfter}
+                    size={size}
+                    showOkButton={showOkButton}
+                    okButtonProps={okButtonProps}
+                    onOk={onOk}
+                    okText={okText}
+                    showCancelButton={allowClear ? true : showCancelButton}
+                    cancelButtonProps={cancelButtonProps}
+                    onCancel={
+                      allowClear
+                        ? () => {
+                            onClearInput();
+                            onClose();
+                          }
+                        : onCancel
+                    }
+                    cancelText={allowClear ? clearText : cancelText}
+                    currentLangKey={currentLangKey}
+                    colorScheme={colorScheme}
+                  />
+                </PopoverBody>
+              </PopoverContent>
+            </PortalWrapper>
+          </>
+        )}
       </Popover>
     );
   }
 );
 
 DatePickerInput.defaultProps = {
-  placeholder: "",
   name: null,
   onFocus: () => {
     return;
@@ -1083,6 +1156,7 @@ DatePickerInput.defaultProps = {
   onClear: () => {
     return;
   },
+  clearText: "Clear",
   ...defaultProps,
 };
 

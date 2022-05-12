@@ -33,14 +33,15 @@ export interface DatePickerProps {
 
 export interface DatePickerInputProps extends DatePickerProps {
   allowClear?: boolean;
+  clearText?: string;
   datePickerDefaultIsOpen?: boolean;
   datePickerIsOpen?: boolean;
   inputProps?: InputProps;
   isInvalid?: boolean;
   name?: string;
-  onBlur?: () => void;
+  onBlur?: (formattedValue: string, value: Dayjs) => void;
   onClear?: (formattedValue: string, value: Dayjs) => void;
-  onFocus?: () => void;
+  onFocus?: (formattedValue: string, value: Dayjs) => void;
   placeholder?: string;
   placement?: Placement;
   ref?: Ref<any>;
