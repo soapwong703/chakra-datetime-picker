@@ -12,8 +12,8 @@ and this project adheres to [Semantic Versioning].
 ### Added
 
 - DatepickerInput support user input
-- Controlled Input Template
-- Ref Input Template
+- Controlled Input Storybook
+- Ref Input Storybook
 
 ### Fixed
 
