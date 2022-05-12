@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [1.1.0] - 2022-05-12
+
 ### Added
 
 - DatepickerInput support user input
@@ -32,5 +34,6 @@ and this project adheres to [Semantic Versioning].
 
 <!-- Versions -->
 
-[unreleased]: https://github.com/Author/Repository/compare/v1.0.3...HEAD
-[1.0.3]: https://github.com/Author/Repository/releases/tag/v1.0.3
+[unreleased]: https://github.com/soapwong703/chakra-datetime-picker/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.0
+[1.0.3]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.0.3
