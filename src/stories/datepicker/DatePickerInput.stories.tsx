@@ -28,9 +28,14 @@ const ControlledTemplate: ComponentStory<typeof DatePickerInput> = (args) => {
     setValue(date);
   }, []);
 
+  const onClickClear = () => {
+    setValue(null);
+  };
+
   return (
     <Box w={200}>
       <DatePickerInput {...args} value={dayjs(value)} onChange={onChange} />
+      <Button onClick={onClickClear}>Clear</Button>
     </Box>
   );
 };

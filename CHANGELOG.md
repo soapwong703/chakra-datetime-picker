@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [1.1.2] - 2022-05-13
+
+### Fixed
+
+- datepickerInput controlled clear not working
+
 ## [1.1.1] - 2022-05-13
 
 ### Fixed
