@@ -45,11 +45,15 @@ export const ControlledInput = ControlledTemplate.bind({});
 const RefTemplate: ComponentStory<typeof DatePickerInput> = (args) => {
   const ref = useRef(null);
 
+  const onLogRef = () => {
+    console.log(ref);
+  };
+
   return (
     <Box w={200}>
       <DatePickerInput {...args} ref={ref} />
 
-      <Button onClick={() => console.log(ref)}>Log Ref</Button>
+      <Button onClick={onLogRef}>Log Ref</Button>
     </Box>
   );
 };

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [1.1.3] - 2022-05-13
+
+### Fixed
+
+- uncontrolled datepickerInput will select current day when open calendar
+
 ## [1.1.2] - 2022-05-13
 
 ### Fixed
@@ -46,7 +52,9 @@ and this project adheres to [Semantic Versioning].
 
 <!-- Versions -->
 
-[unreleased]: https://github.com/soapwong703/chakra-datetime-picker/compare/1.1.1...HEAD
+[unreleased]: https://github.com/soapwong703/chakra-datetime-picker/compare/1.1.3...HEAD
+[1.1.3]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.3
+[1.1.2]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.2
 [1.1.1]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.1
 [1.1.0]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.0
 [1.0.3]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.0.3
