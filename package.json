@@ -4,6 +4,13 @@
   "description": "A Datetimepicker Component designed for Chakra-UI",
   "homepage": "https://github.com/soapwong703/chakra-datetime-picker",
   "repository": "https://github.com/soapwong703/chakra-datetime-picker",
+  "keywords": [
+    "react",
+    "chakra ui",
+    "datepicker",
+    "datetimepicker",
+    "typescript"
+  ],
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
