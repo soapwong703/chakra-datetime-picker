@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- datepickerInput clear button cannot clear controlled value
+
 ## [1.1.0] - 2022-05-12
 
 ### Added

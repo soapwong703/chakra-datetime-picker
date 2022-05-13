@@ -5,6 +5,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { DatePickerInput } from "../../DatePicker";
 import { Box, Button } from "@chakra-ui/react";
 import { useCallback } from "react";
+import dayjs from "dayjs";
 
 export default {
   title: "chakra-datetime-picker / DatePickerInput",
@@ -29,7 +30,7 @@ const ControlledTemplate: ComponentStory<typeof DatePickerInput> = (args) => {
 
   return (
     <Box w={200}>
-      <DatePickerInput {...args} value={value} onChange={onChange} />
+      <DatePickerInput {...args} value={dayjs(value)} onChange={onChange} />
     </Box>
   );
 };

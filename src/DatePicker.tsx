@@ -20,7 +20,6 @@ import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
   FaRegCalendar,
-  FaTimesCircle,
 } from "react-icons/fa";
 
 import {
@@ -1043,7 +1042,7 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
         placement={placement}
         isLazy
       >
-        {({ onClose }) => (
+        {({ isOpen, onClose }) => (
           <>
             <InputGroup
               minW={"220px"}
@@ -1105,36 +1104,38 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
             <PortalWrapper isWrapped={wrapPortal}>
               <PopoverContent zIndex={4} minW="fit-content" w="auto">
                 <PopoverBody padding="3px">
-                  <DatePicker
-                    picker={picker}
-                    defaultValue={selectedDay}
-                    format={format}
-                    onChange={localOnChange}
-                    value={valueIsValid ? value : null}
-                    selectableDays={selectableDays}
-                    showSelectableDays={showSelectableDays}
-                    showTimeSelector={showTimeSelector}
-                    disableTimestampBefore={disableTimestampBefore}
-                    disableTimestampAfter={disableTimestampAfter}
-                    size={size}
-                    showOkButton={showOkButton}
-                    okButtonProps={okButtonProps}
-                    onOk={onOk}
-                    okText={okText}
-                    showCancelButton={allowClear ? true : showCancelButton}
-                    cancelButtonProps={cancelButtonProps}
-                    onCancel={
-                      allowClear
-                        ? () => {
-                            onClearInput();
-                            onClose();
-                          }
-                        : onCancel
-                    }
-                    cancelText={allowClear ? clearText : cancelText}
-                    currentLangKey={currentLangKey}
-                    colorScheme={colorScheme}
-                  />
+                  {isOpen && (
+                    <DatePicker
+                      picker={picker}
+                      defaultValue={selectedDay}
+                      format={format}
+                      onChange={localOnChange}
+                      value={valueIsValid ? value : null}
+                      selectableDays={selectableDays}
+                      showSelectableDays={showSelectableDays}
+                      showTimeSelector={showTimeSelector}
+                      disableTimestampBefore={disableTimestampBefore}
+                      disableTimestampAfter={disableTimestampAfter}
+                      size={size}
+                      showOkButton={showOkButton}
+                      okButtonProps={okButtonProps}
+                      onOk={onOk}
+                      okText={okText}
+                      showCancelButton={allowClear ? true : showCancelButton}
+                      cancelButtonProps={cancelButtonProps}
+                      onCancel={
+                        allowClear
+                          ? () => {
+                              onClearInput();
+                              onClose();
+                            }
+                          : onCancel
+                      }
+                      cancelText={allowClear ? clearText : cancelText}
+                      currentLangKey={currentLangKey}
+                      colorScheme={colorScheme}
+                    />
+                  )}
                 </PopoverBody>
               </PopoverContent>
             </PortalWrapper>
