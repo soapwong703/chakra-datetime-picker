@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [1.1.5] - 2022-05-17
+
+### Fixed
+
+- datepickerInput isDisabled does not disable calendar button
+
 ## [1.1.4] - 2022-05-17
 
 ### Fixed
@@ -59,7 +65,8 @@ and this project adheres to [Semantic Versioning].
 
 <!-- Versions -->
 
-[unreleased]: https://github.com/soapwong703/chakra-datetime-picker/compare/1.1.4...HEAD
+[unreleased]: https://github.com/soapwong703/chakra-datetime-picker/compare/1.1.5...HEAD
+[1.1.5]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.5
 [1.1.4]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.4
 [1.1.3]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.3
 [1.1.2]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.2

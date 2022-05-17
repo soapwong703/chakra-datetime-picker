@@ -1087,18 +1087,20 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
                 isInvalid={isInvalid}
                 errorBorderColor="red.500"
               />
-              <InputRightElement>
-                <PopoverTrigger>
-                  <IconButton
-                    aria-label="calendar"
-                    icon={<FaRegCalendar />}
-                    size={componentSize[size].calendarButton.size}
-                    variant="ghost"
-                    isRound
-                    colorScheme={colorScheme}
-                  ></IconButton>
-                </PopoverTrigger>
-              </InputRightElement>
+              {!isDisabled && (
+                <InputRightElement>
+                  <PopoverTrigger>
+                    <IconButton
+                      aria-label="calendar"
+                      icon={<FaRegCalendar />}
+                      size={componentSize[size].calendarButton.size}
+                      variant="ghost"
+                      isRound
+                      colorScheme={colorScheme}
+                    ></IconButton>
+                  </PopoverTrigger>
+                </InputRightElement>
+              )}
             </InputGroup>
 
             <PortalWrapper isWrapped={wrapPortal}>
