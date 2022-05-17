@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning].
 ### Fixed
 
 - controlled value does not update datepickerInput default value
+- default value not working
 
 ## [1.1.3] - 2022-05-13
 

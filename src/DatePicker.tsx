@@ -1016,22 +1016,18 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
     const defaultValueRef = useRef(defaultValue).current;
 
     useEffect(() => {
+      if (value) {
+        const date = dayjs(value);
+        setSelectedDay(isValidDate(date) ? date.format(format) : "");
+      }
+    }, [value, format]);
+
+    useEffect(() => {
       if (defaultValueRef) {
         const date = dayjs(defaultValueRef);
         setSelectedDay(isValidDate(date) ? date.format(format) : "");
-      } else {
-        setSelectedDay("");
       }
     }, [defaultValueRef, format]);
-
-    useEffect(() => {
-      if (valueIsValid) {
-        const date = dayjs(value);
-        setSelectedDay(isValidDate(date) ? date.format(format) : "");
-      } else {
-        setSelectedDay("");
-      }
-    }, [value, format]);
 
     useEffect(() => {
       if (selectedDay !== undefined) {
