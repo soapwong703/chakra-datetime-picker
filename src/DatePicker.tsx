@@ -989,12 +989,16 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
     const [selectedDay, setSelectedDay] = useState("");
     const isValidDate = (d) => !!dayjs(d, format)?.valueOf();
 
+    const valueIsValid = useMemo(
+      () => isValidDate(value ?? selectedDay),
+      [value, selectedDay]
+    );
+
     const onClearInput = () => {
       if (!allowClear) {
         inputRef.current.value = selectedDay;
         return;
       }
-      inputRef.current.value = "";
       setSelectedDay("");
       onChange("", null);
       onClear("", null);
@@ -1007,7 +1011,6 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
       }
       setSelectedDay(dateString);
       onChange(dateString, date);
-      inputRef.current.value = dateString;
     };
 
     const defaultValueRef = useRef(defaultValue).current;
@@ -1018,7 +1021,6 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
         setSelectedDay(isValidDate(date) ? date.format(format) : "");
       } else {
         setSelectedDay("");
-        inputRef.current.value = "";
       }
     }, [defaultValueRef, format]);
 
@@ -1028,14 +1030,14 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
         setSelectedDay(isValidDate(date) ? date.format(format) : "");
       } else {
         setSelectedDay("");
-        inputRef.current.value = "";
       }
     }, [value, format]);
 
-    const valueIsValid = useMemo(
-      () => isValidDate(value ?? selectedDay),
-      [value, selectedDay]
-    );
+    useEffect(() => {
+      if (selectedDay !== undefined) {
+        inputRef.current.value = selectedDay;
+      }
+    }, [selectedDay]);
 
     return (
       <Popover
