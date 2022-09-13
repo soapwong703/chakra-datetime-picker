@@ -44,6 +44,7 @@
     "babel-loader": "^8.2.3",
     "chromatic": "^6.4.1",
     "parcel": "^2.5.0",
+    "react-hook-form": "^7.35.0",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
