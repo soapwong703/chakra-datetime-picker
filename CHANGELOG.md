@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- DatePickerInput null value not reflected to display
+
 ## [1.1.5] - 2022-05-17
 
 ### Fixed

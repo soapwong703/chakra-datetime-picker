@@ -1016,17 +1016,17 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
     const defaultValueRef = useRef(defaultValue).current;
 
     useEffect(() => {
-      if (value) {
-        const date = dayjs(value);
-        setSelectedDay(isValidDate(date) ? date.format(format) : "");
-      }
+      if (!value) return setSelectedDay("");
+
+      const date = dayjs(value);
+      setSelectedDay(isValidDate(date) ? date.format(format) : "");
     }, [value, format]);
 
     useEffect(() => {
-      if (defaultValueRef) {
-        const date = dayjs(defaultValueRef);
-        setSelectedDay(isValidDate(date) ? date.format(format) : "");
-      }
+      if (!defaultValueRef) return setSelectedDay("");
+
+      const date = dayjs(defaultValueRef);
+      setSelectedDay(isValidDate(date) ? date.format(format) : "");
     }, [defaultValueRef, format]);
 
     useEffect(() => {
@@ -1059,15 +1059,21 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
                     : onFocus("", null)
                 }
                 onBlur={(e) => {
+                  console.log("test1");
+
                   if (e.target.value === "") {
                     onClearInput();
                     return;
                   }
+                  console.log("test2");
+
                   if (!isValidDate(e.target.value)) {
                     onBlur("", null);
                     localOnChange("", null);
                     return;
                   }
+                  console.log("test3");
+
                   localOnChange(
                     dayjs(e.target.value).format(format),
                     dayjs(e.target.value)
