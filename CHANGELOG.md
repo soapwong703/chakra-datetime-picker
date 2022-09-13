@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [1.1.6] - 2022-09-13
+
 ### Added
 
 - react hook form storybook
@@ -73,7 +75,8 @@ and this project adheres to [Semantic Versioning].
 
 <!-- Versions -->
 
-[unreleased]: https://github.com/soapwong703/chakra-datetime-picker/compare/1.1.5...HEAD
+[unreleased]: https://github.com/soapwong703/chakra-datetime-picker/compare/1.1.6...HEAD
+[1.1.6]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.6
 [1.1.5]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.5
 [1.1.4]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.4
 [1.1.3]: https://github.com/soapwong703/chakra-datetime-picker/releases/tag/1.1.3
