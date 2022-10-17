@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- Controlled input does not show default value
+
 ## [1.1.6] - 2022-09-13
 
 ### Added

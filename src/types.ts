@@ -28,7 +28,7 @@ export interface DatePickerProps {
     text: string;
     timestamp: number | Dayjs;
   }[];
-  value?: Dayjs | null;
+  value?: Dayjs | string | null;
 }
 
 export interface DatePickerInputProps extends DatePickerProps {
