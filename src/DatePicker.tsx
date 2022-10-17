@@ -1059,20 +1059,16 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = forwardRef(
                     : onFocus("", null)
                 }
                 onBlur={(e) => {
-                  console.log("test1");
-
                   if (e.target.value === "") {
                     onClearInput();
                     return;
                   }
-                  console.log("test2");
 
                   if (!isValidDate(e.target.value)) {
                     onBlur("", null);
                     localOnChange("", null);
                     return;
                   }
-                  console.log("test3");
 
                   localOnChange(
                     dayjs(e.target.value).format(format),
