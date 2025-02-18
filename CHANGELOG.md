@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [1.1.8] - 2025-02-18
+
 ### Fixed
 
 - Security Update
