@@ -10,7 +10,7 @@ on: push
 jobs:
   test:
     # Operating System
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     # Job steps
     steps:
       - uses: actions/checkout@v1

@@ -47,7 +47,7 @@ This component utilize dayjs to support date and datetime input with Chakra-UI s
 | showTimeSelector       | boolean                                                         | Display control of the Time Selector                                                                                   |
 | size                   | "sm" \| "md" \| "lg                                             | Size of the DatePicker Component                                                                                       |
 | selectableDays         | { format: string; text: string; timestamp: number \| Dayjs } [] | Presets of dates. Can set display format and text.                                                                     |
-| value                  | Dayjs \| null                                                   | Date Value of the Component                                                                                            |
+| value                  | Dayjs \| string \| null                                         | Date Value of the Component                                                                                            |
 
 ## DatePickerInput
 
