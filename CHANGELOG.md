@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- Security Update
+
 ## [1.1.7] - 2022-10-17
 
 ### Fixed
